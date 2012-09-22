@@ -1,0 +1,9 @@
+Implements the value iteration, policy iteration and modified policy iteration algorithms for infinite horizon MDP 
+with discounted rewards (the pseudo code can be found in Section 17.2 and 17.3 in the Russel and Norvig book).
+
+Use your code to verify your answer for exercise 17.8.
+
+Test your code with the world in Figure 17.1 and report on your observations on the followings:
+- For value iteration, how do value of states change wrt the number of iterations (you can pick one or two states)? 
+Does this depend on the maximum allowed error of the state values?
+- Compare the three algorithms in terms of running time to reach the optimal policy.
