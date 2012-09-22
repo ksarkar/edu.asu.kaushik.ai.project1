@@ -11,6 +11,13 @@ public class ValueIteration {
 	private double discountFactor;
 	
 
+	/**
+	 * Implementation of main value iteration algorithm
+	 * 
+	 * @param mdp The MDP
+	 * @param maxErr The maximum allowable error in the estimation of the state value
+	 * @return The vector containing the calculated state values
+	 */
 	public double[] valueIteration(MDP mdp, double maxErr) {
 		int numStates = mdp.getNumStates();
 		
@@ -30,40 +37,40 @@ public class ValueIteration {
 				val[i] = states[i].getReward();
 				Action actions[] = states[i].getActions();
 				double max = 0.0d;
-				double sum = 0.0d;
 				for (int j = 0; j < actions.length; j++) {
-					sum = 0.0d;
+					double sum = 0.0d;
 					double[] probs = actions[i].getProbs();
-					int[] newStateIds = actions[i].getNextStateIds();
+					int[] nextStateIds = actions[i].getNextStateIds();
 					for (int k = 0; k < probs.length; k++) {
-						
+						sum = sum + (probs[k] * val[nextStateIds[k]]);
+					}
+					if (sum > max) {
+						max = sum;
 					}
 				}
+				val[i] = val[i] + this.discountFactor * max;
+				
+				double diff = Math.abs(val[i] - oldVal[i]);
+				if ( diff > delta) {
+					delta = diff;
+				}
 			}
-		} while(false);
+		} while(delta >= this.getMaxError(maxErr));
 		
 		return val;
 	}
+	
+	private double getMaxError(double maxErr) {
+		return maxErr * (1 - this.discountFactor) / this.discountFactor;
+	}
+	
 	private void initValue(double[] val) {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < val.length; i++) {
+			val[i]	= 0.0d;
+		}
 	}
+	
 	public static void main(String[] args) {
-		System.out.println("This is the class for value iteration.");
-		int[] a = {1,2,3,4,5};
-		int[] b = new int[5];
-		System.arraycopy(a, 0, b, 0, a.length);
 		
-		b[4] = 0;
-		for (int i : a) {
-			System.out.println(i + "\t");
-		}
-		
-		System.out.println();
-		for (int i : b) {
-			System.out.println(i + "\t");
-		}
-
 	}
-
 }
