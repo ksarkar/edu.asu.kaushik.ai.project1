@@ -8,10 +8,7 @@ public class ValueIteration {
 	/**
 	 * Discount factor
 	 */
-	private double discountFactor;
-	
-	private double[] test = {0.705, 0.762, 0.812, 0.655, 0.868, 0.611, 0.660, 0.918, 0.388, -1.0, 1.0};
-	
+	private double discountFactor;	
 
 	/**
 	 * Implementation of main value iteration algorithm
@@ -68,15 +65,6 @@ public class ValueIteration {
 	
 	private double getMaxError(double maxErr) {
 		return maxErr * (1 - this.discountFactor) / this.discountFactor;
-	}
-	
-	private void initValue(double[] val) {
-		/*
-		for (int i = 0; i < val.length; i++) {
-			val[i]	= 0.0d;
-		}
-		*/
-		System.arraycopy(test, 0, val, 0, test.length);
 	}
 	
 	public Action[] greedyPolicy(MDP mdp, double[] values) {
