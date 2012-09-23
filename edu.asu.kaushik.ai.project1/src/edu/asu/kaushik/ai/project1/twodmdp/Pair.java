@@ -43,6 +43,11 @@ public class Pair {
 	public int hashCode() {
 		return new Double(this.x).hashCode() ^ new Double(this.y).hashCode();
 	}
+	
+	@Override
+	public String toString() {
+		return "(" + this.x + "," + this.y + ")";
+	}
 
 	/**
 	 * @param args

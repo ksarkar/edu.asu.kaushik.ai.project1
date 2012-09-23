@@ -7,6 +7,21 @@ public class TwoDMDPAction implements Action {
 	private double[] probs;
 	private int[] nextStates;
 
+	public TwoDMDPAction(String actionName, double[] probs, int[] nextStates) {
+		super();
+		this.actionName = actionName;
+		this.probs = probs;
+		this.nextStates = nextStates;
+	}
+
+	public String getActionName() {
+		return actionName;
+	}
+
+	public void setActionName(String actionName) {
+		this.actionName = actionName;
+	}
+
 	@Override
 	public double[] getProbs() {
 		return probs;

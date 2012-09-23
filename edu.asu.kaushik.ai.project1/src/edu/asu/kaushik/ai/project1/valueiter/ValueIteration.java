@@ -18,7 +18,9 @@ public class ValueIteration {
 	 * @param maxErr The maximum allowable error in the estimation of the state value
 	 * @return The vector containing the calculated state values
 	 */
-	public double[] valueIteration(MDP mdp, double maxErr) {
+	public double[] valueIteration(MDP mdp, double maxErr, double discountFactor) {
+		this.discountFactor = discountFactor;
+		
 		int numStates = mdp.getNumStates();
 		
 		// local variables
@@ -36,11 +38,11 @@ public class ValueIteration {
 			for (int i = 0; i < numStates; i++) {
 				val[i] = states[i].getReward();
 				Action actions[] = states[i].getActions();
-				double max = 0.0d;
+				double max = Double.NEGATIVE_INFINITY;
 				for (int j = 0; j < actions.length; j++) {
 					double sum = 0.0d;
-					double[] probs = actions[i].getProbs();
-					int[] nextStateIds = actions[i].getNextStateIds();
+					double[] probs = actions[j].getProbs();
+					int[] nextStateIds = actions[j].getNextStateIds();
 					for (int k = 0; k < probs.length; k++) {
 						sum = sum + (probs[k] * val[nextStateIds[k]]);
 					}
@@ -48,7 +50,8 @@ public class ValueIteration {
 						max = sum;
 					}
 				}
-				val[i] = val[i] + this.discountFactor * max;
+				max = Double.isInfinite(max)? 0 : max;
+				val[i] = val[i] + /*this.discountFactor **/ max;
 				
 				double diff = Math.abs(val[i] - oldVal[i]);
 				if ( diff > delta) {
@@ -68,6 +71,30 @@ public class ValueIteration {
 		for (int i = 0; i < val.length; i++) {
 			val[i]	= 0.0d;
 		}
+	}
+	
+	public Action[] greedyPolicy(MDP mdp, double[] values) {
+		State[] states = mdp.getStates();
+		Action[] policy = new Action[states.length];
+		
+		for (int i = 0; i < states.length; i++) {
+			Action actions[] = states[i].getActions();
+			double max = Double.NEGATIVE_INFINITY;
+			policy[i] = null;
+			for (int j = 0; j < actions.length; j++) {
+				double sum = 0.0d;
+				double[] probs = actions[j].getProbs();
+				int[] nextStateIds = actions[j].getNextStateIds();
+				for (int k = 0; k < probs.length; k++) {
+					sum = sum + (probs[k] * values[nextStateIds[k]]);
+				}
+				if (sum > max) {
+					max = sum;
+					policy[i] = actions[j];
+				}
+			}
+		}
+		return policy;
 	}
 	
 	public static void main(String[] args) {
