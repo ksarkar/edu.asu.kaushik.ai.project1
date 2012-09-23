@@ -1,7 +1,11 @@
 package edu.asu.kaushik.ai.project1.twodmdp;
 
-import java.util.HashMap;
-
+/**
+ * Data structure for holding position coordinates of the states of the MDP.
+ * 
+ * @author Kaushik
+ *
+ */
 public class Pair {
 	int x;
 	int y;
@@ -53,24 +57,5 @@ public class Pair {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Pair[] pairs = new Pair[4];
-		pairs[0] = new Pair(1,1);
-		pairs[1] = new Pair(1,2);
-		pairs[2] = new Pair(2,1);
-		pairs[3] = new Pair(1,1);
-		
-		System.out.println("(1,2) == (2,1)? " + pairs[1].equals(pairs[2]));
-		
-		System.out.println("(1,1) == (1,1)? " + pairs[0].equals(pairs[3]));
-		
-		HashMap<Pair, Integer> map = new HashMap<Pair, Integer>();
-		
-		for (int i = 0; i < 3; i++) {
-			map.put(pairs[i], i);
-		}
-		
-		System.out.println("Id of the pair (1,2) is " + map.get(new Pair(1,2)));
-
 	}
-
 }

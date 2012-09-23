@@ -2,6 +2,13 @@ package edu.asu.kaushik.ai.project1.twodmdp;
 
 import edu.asu.kaushik.ai.project1.mdp.Action;
 
+/**
+ * Implementation of the generic action interface for supporting worlds of Russel Norvig book.
+ * 
+ * @author Kaushik
+ *
+ */
+
 public class TwoDMDPAction implements Action {
 	private String actionName;
 	private double[] probs;

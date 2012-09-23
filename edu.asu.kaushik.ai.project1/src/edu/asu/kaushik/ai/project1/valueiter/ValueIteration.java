@@ -4,6 +4,12 @@ import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.mdp.MDP;
 import edu.asu.kaushik.ai.project1.mdp.State;
 
+/**
+ * Core value iteration implementation. Uses abstract interfaces for MDP, states and actions.
+ * 
+ * @author Kaushik
+ *
+ */
 public class ValueIteration {
 	/**
 	 * Discount factor
@@ -11,7 +17,7 @@ public class ValueIteration {
 	private double discountFactor;	
 
 	/**
-	 * Implementation of main value iteration algorithm
+	 * Generic implementation of main value iteration algorithm.
 	 * 
 	 * @param mdp The MDP
 	 * @param maxErr The maximum allowable error in the estimation of the state value
@@ -67,6 +73,13 @@ public class ValueIteration {
 		return maxErr * (1 - this.discountFactor) / this.discountFactor;
 	}
 	
+	/**
+	 * Generic implementation of the greedy policy evaluation algorithm for finding out optimal policy with value iteration.
+	 * 
+	 * @param mdp The MDP
+	 * @param values The value vector for each state of the MDP obtained from the value iteration algorithm
+	 * @return The greedy policy corresponding to the values returned by the value iteration
+	 */
 	public Action[] greedyPolicy(MDP mdp, double[] values) {
 		State[] states = mdp.getStates();
 		Action[] policy = new Action[states.length];

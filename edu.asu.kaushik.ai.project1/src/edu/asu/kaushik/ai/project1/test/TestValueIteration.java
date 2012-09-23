@@ -5,6 +5,13 @@ import edu.asu.kaushik.ai.project1.twodmdp.Pair;
 import edu.asu.kaushik.ai.project1.twodmdp.TwoDMDP;
 import edu.asu.kaushik.ai.project1.valueiter.ValueIteration;
 
+/**
+ * Tests the value iteration algorithm. All the five environments of figure 17.2 of Russel, Norvig book
+ * is tested with identical results.
+ * 
+ * @author Kaushik
+ *
+ */
 public class TestValueIteration {
 
 	public static void TestFig17_1() {

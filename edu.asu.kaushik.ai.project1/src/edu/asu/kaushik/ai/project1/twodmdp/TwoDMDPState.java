@@ -3,6 +3,11 @@ package edu.asu.kaushik.ai.project1.twodmdp;
 import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.mdp.State;
 
+/**
+ * Implementation of the generic MDP state for supporting two dimensional spatical MDPs of Russel, Norvig Book.
+ * @author Kaushik
+ *
+ */
 public class TwoDMDPState implements State {
 
 	private Pair position;
