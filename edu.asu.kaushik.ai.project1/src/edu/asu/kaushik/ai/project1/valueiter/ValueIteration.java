@@ -10,6 +10,8 @@ public class ValueIteration {
 	 */
 	private double discountFactor;
 	
+	private double[] test = {0.705, 0.762, 0.812, 0.655, 0.868, 0.611, 0.660, 0.918, 0.388, -1.0, 1.0};
+	
 
 	/**
 	 * Implementation of main value iteration algorithm
@@ -27,7 +29,9 @@ public class ValueIteration {
 		double[] oldVal = new double[numStates];
 		double[] val = new double[numStates];
 		
-		this.initValue(val);
+		for (int i = 0; i < val.length; i++) {
+			val[i] = 0.0d;
+		}
 		
 		State[] states = mdp.getStates();
 		double delta = 0;
@@ -36,7 +40,6 @@ public class ValueIteration {
 			System.arraycopy(val, 0, oldVal, 0, val.length);
 			delta = 0;
 			for (int i = 0; i < numStates; i++) {
-				val[i] = states[i].getReward();
 				Action actions[] = states[i].getActions();
 				double max = Double.NEGATIVE_INFINITY;
 				for (int j = 0; j < actions.length; j++) {
@@ -51,7 +54,7 @@ public class ValueIteration {
 					}
 				}
 				max = Double.isInfinite(max)? 0 : max;
-				val[i] = val[i] + /*this.discountFactor **/ max;
+				val[i] = states[i].getReward() + this.discountFactor * max;
 				
 				double diff = Math.abs(val[i] - oldVal[i]);
 				if ( diff > delta) {
@@ -68,9 +71,12 @@ public class ValueIteration {
 	}
 	
 	private void initValue(double[] val) {
+		/*
 		for (int i = 0; i < val.length; i++) {
 			val[i]	= 0.0d;
 		}
+		*/
+		System.arraycopy(test, 0, val, 0, test.length);
 	}
 	
 	public Action[] greedyPolicy(MDP mdp, double[] values) {

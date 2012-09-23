@@ -235,6 +235,8 @@ public class TwoDMDP implements MDP {
 	 * @param isGoalTerminatingState Whether goal states are terminating or not
 	 */
 	public void prettyPrint(double[] values, Action[] policy, boolean isGoalTerminatingState) {
+		System.out.println("Pretty printing the world...");
+		
 		if (isGoalTerminatingState) {
 			for (int j = this.yHeight; j >= 1; j--) {
 				for (int i = 1; i <= this.xLength; i++) {
@@ -244,7 +246,7 @@ public class TwoDMDP implements MDP {
 					}
 					else {
 						int index = this.map.get(position);
-						System.out.print(String.format("%.2f", values[index]) + ",");
+						System.out.print(String.format("%.3f", values[index]) + ",");
 						if (this.isGoalState(position, goalPositions) >= 0) {
 							System.out.print("goal\t");
 						} else {
@@ -264,7 +266,7 @@ public class TwoDMDP implements MDP {
 					}
 					else {
 						int index = this.map.get(position);
-						System.out.print(values[index] + ",");
+						System.out.print(String.format("%.3f", values[index]) + ",");
 						System.out.print(policy[index].getActionName() + "\t");
 					}
 				}

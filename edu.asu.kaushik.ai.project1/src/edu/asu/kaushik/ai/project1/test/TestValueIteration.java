@@ -38,8 +38,8 @@ public class TestValueIteration {
 		
 		ValueIteration valIter = new ValueIteration();
 		
-		double maxErr = 0.0001;
-		double discountFactor = 0.99;
+		double maxErr = 0.001;
+		double discountFactor = 0.9999;
 		
 		System.out.println("Starting value iteration...");
 		long startTime = System.currentTimeMillis();
