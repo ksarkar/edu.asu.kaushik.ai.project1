@@ -99,10 +99,12 @@ public class PolicyIteration {
 			coeffs[i][i] = coeffs[i][i] + 1.0000d;
 			
 			// other terms
-			double[] probs = policy[i].getProbs();
-			int[] nextStates = policy[i].getNextStateIds();
-			for (int j = 0; j < probs.length; j++) {
-				coeffs[i][nextStates[j]] = coeffs[i][nextStates[j]] - (discountFactor * probs[j]);
+			if (policy[i] != null) {
+				double[] probs = policy[i].getProbs();
+				int[] nextStates = policy[i].getNextStateIds();
+				for (int j = 0; j < probs.length; j++) {
+					coeffs[i][nextStates[j]] = coeffs[i][nextStates[j]] - (discountFactor * probs[j]);
+				}
 			}
 		}
 		

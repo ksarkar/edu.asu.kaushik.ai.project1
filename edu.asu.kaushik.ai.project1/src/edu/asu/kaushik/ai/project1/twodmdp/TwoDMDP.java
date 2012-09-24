@@ -235,18 +235,24 @@ public class TwoDMDP implements MDP {
 	 * @param isGoalTerminatingState Whether goal states are terminating or not
 	 */
 	public void prettyPrint(double[] values, Action[] policy, boolean isGoalTerminatingState) {
-		System.out.println("Pretty printing the world...");
+		System.out.println("Pretty printing the policy...");
 		
 		if (isGoalTerminatingState) {
 			for (int j = this.yHeight; j >= 1; j--) {
 				for (int i = 1; i <= this.xLength; i++) {
 					Pair position = new Pair(i,j);
 					if (!notForbidden(position, forbiddenPositions)) {
-						System.out.print("forbidden\t");
+						// for better alignment :-)
+						if (values == null)
+							System.out.print("illegal\t");
+						else
+							System.out.print("forbidden\t");
 					}
 					else {
 						int index = this.map.get(position);
-						System.out.print(String.format("%.3f", values[index]) + ",");
+						if (values != null) {
+							System.out.print(String.format("%.3f", values[index]) + ",");
+						}
 						if (this.isGoalState(position, goalPositions) >= 0) {
 							System.out.print("goal\t");
 						} else {
@@ -262,11 +268,17 @@ public class TwoDMDP implements MDP {
 				for (int i = 1; i <= this.xLength; i++) {
 					Pair position = new Pair(i,j);
 					if (!notForbidden(position, forbiddenPositions)) {
-						System.out.print("forbidden\t");
+						// for better alignment :-)
+						if (values == null)
+							System.out.print("illegal\t");
+						else
+							System.out.print("forbidden\t");
 					}
 					else {
 						int index = this.map.get(position);
-						System.out.print(String.format("%.3f", values[index]) + ",");
+						if (values != null) {
+							System.out.print(String.format("%.3f", values[index]) + ",");
+						}
 						System.out.print(policy[index].getActionName() + "\t");
 					}
 				}
