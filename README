@@ -1,0 +1,40 @@
+Introduction:
+--------------
+This project contains the implementation of value iteration, policy iteration, and modified policy
+iteration algorithms adapted from R&N AI book. All the algorithms are tested on all the five
+environments of fig 17.2 of R&N   book. The results are identical to the figure.
+
+How to Run:
+-----------
+Run the three programs in the edu.asu.kaushik.ai.project1.test package to test the core value and
+policy iteration algorithms on the five environments of the fig 17.2 of R&N book. 
+
+Package description:
+--------------------
+mdp - Contains generic interfaces for MDP, states, and actions. Core value and policy
+      iteration algorithms are written in terms of this interfaces to make them generic.
+      
+valuiteration - Contains the main value iteration algorithm.
+
+policyiteration - Contains the main policy iteration and modified policy iteration algorithm.
+
+twodmdp - Contains implementation of the abstract mdp classes for fig 17.1 type environments. 
+		  Can model two dimensional worlds of R&N book with arbitrary size, forbidden states, 
+		  goal states, goal rewards, and normal rewards. Each state has 
+		  four actions - up, down, right, left available to them. The goal states have the actions
+		  depending on whether they are terminating or not. Probability of going in the desired 
+		  direction is 0.8 (fixed). The agent can go to either of the perpendicular directions 
+		  of the desired direction with probability 0.1 each.
+		  
+test - Contains the test code for value iteration, policy iteration, and modified policy iteration
+	   algorithm. All the five environments of the fig 17.2 of R&N book are used as test cases.
+	   The results match that of the fig 17.2. 
+	   
+More Information:
+-----------------
+Check the respective source files or the java docs for further information on the API or implementation.
+
+Reference:
+----------
+I used JAMA package for solving systems of linear equations. 
+http://math.nist.gov/javanumerics/jama/
