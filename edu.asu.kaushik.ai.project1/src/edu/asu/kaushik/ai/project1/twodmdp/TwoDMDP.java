@@ -66,7 +66,10 @@ public class TwoDMDP implements MDP {
 				   double normalReward,
 				   boolean isGoalTerminatingState) {
 		
-		this.states = new TwoDMDPState[(xLength * yHeight) - forbiddenPositions.length];
+		
+		this.states = new TwoDMDPState[(xLength * yHeight) 
+		                               - ((forbiddenPositions == null) ? 
+		                            		   0 : forbiddenPositions.length)];
 		this.map = new HashMap<Pair, Integer>();
 		
 		this.xLength = xLength;
@@ -91,6 +94,47 @@ public class TwoDMDP implements MDP {
 		
 		this.setActions(forbiddenPositions, goalPositions, isGoalTerminatingState);
 		
+	}
+	
+	/**
+	 * Little bit more general constructor than the previous one. It allows one to set the rewards
+	 * of few special states different from the normal reward. Can handle the MDPs of problem
+	 * 17.8 of R&N book.
+	 * 
+	 * @param xLength The breadth of the two dimensional world
+	 * @param yHeight The height of the two dimensional world
+	 * @param forbiddenPositions The array of forbidden positions
+	 * @param goalPositions The array of goal positions
+	 * @param goalRewards The reward of the goal position; should be in the same order as goalPositions
+	 * @param normalReward The reward for all other positions
+	 * @param specialStates The states with special reward
+	 * @param specialRewards The special rewards; should be in the same order as the special states
+	 * @param isGoalTerminatingState If set true then the goal positions are the terminating positions, otherwise
+	 * the goal positions also have all the four actions available to them
+	 */
+	public TwoDMDP(int xLength, 
+			   int yHeight, 
+			   Pair[] forbiddenPositions,
+			   Pair[] goalPositions,
+			   double[] goalRewards,
+			   double normalReward,
+			   Pair[] specialStates,
+			   double[] specialRewards,
+			   boolean isGoalTerminatingState) {
+	
+		// Call the normal constructor for setting other parameters.
+		this(xLength, 
+			 yHeight, 
+			 forbiddenPositions, 
+			 goalPositions, 
+			 goalRewards, 
+			 normalReward, 
+			 isGoalTerminatingState);
+		
+		for (int i = 0; i < specialStates.length; i++) {
+			states[this.map.get(specialStates[i])].setReward(specialRewards[i]);
+		}
+
 	}
 
 	private void setActions(Pair[] forbiddenPositions, 
@@ -218,6 +262,9 @@ public class TwoDMDP implements MDP {
 	}
 
 	private boolean notForbidden(Pair position, Pair[] forbiddenPositions) {
+		if (forbiddenPositions == null) {
+			return true;
+		}
 		for (Pair forbidden : forbiddenPositions) {
 			if (forbidden.equals(position)) {
 				return false;

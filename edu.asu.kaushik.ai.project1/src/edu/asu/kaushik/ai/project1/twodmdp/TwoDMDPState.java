@@ -36,6 +36,10 @@ public class TwoDMDPState implements State {
 		this.position = position;
 	}
 
+	public void setReward(double reward) {
+		this.reward = reward;
+	}
+
 	@Override
 	public double getReward() {
 		return this.reward;
