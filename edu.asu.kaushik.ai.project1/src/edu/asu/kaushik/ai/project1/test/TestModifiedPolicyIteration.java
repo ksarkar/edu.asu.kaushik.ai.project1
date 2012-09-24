@@ -49,7 +49,7 @@ public class TestModifiedPolicyIteration {
 		
 		double discountFactor = 0.9999;
 		
-		System.out.println("Starting policy iteration...");
+		System.out.println("Starting modified policy iteration...");
 		long startTime = System.currentTimeMillis();
 		Action[] policy = policyIter.policyIteration(mdp, discountFactor);
 		System.out.println("Policy Iteration Finished in "+
@@ -96,7 +96,7 @@ public class TestModifiedPolicyIteration {
 		
 		double discountFactor = 0.9999;
 		
-		System.out.println("Starting policy iteration...");
+		System.out.println("Starting modified policy iteration...");
 		long startTime = System.currentTimeMillis();
 		Action[] policy = policyIter.policyIteration(mdp, discountFactor);
 		System.out.println("Policy Iteration Finished in "+
@@ -143,7 +143,7 @@ public class TestModifiedPolicyIteration {
 		
 		double discountFactor = 0.9999;
 		
-		System.out.println("Starting policy iteration...");
+		System.out.println("Starting modified policy iteration...");
 		long startTime = System.currentTimeMillis();
 		Action[] policy = policyIter.policyIteration(mdp, discountFactor);
 		System.out.println("Policy Iteration Finished in "+
@@ -190,7 +190,7 @@ public class TestModifiedPolicyIteration {
 		
 		double discountFactor = 0.9999;
 		
-		System.out.println("Starting policy iteration...");
+		System.out.println("Starting modified policy iteration...");
 		long startTime = System.currentTimeMillis();
 		Action[] policy = policyIter.policyIteration(mdp, discountFactor);
 		System.out.println("Policy Iteration Finished in "+
@@ -237,7 +237,7 @@ public class TestModifiedPolicyIteration {
 		
 		double discountFactor = 0.9999;
 		
-		System.out.println("Starting policy iteration...");
+		System.out.println("Starting modified policy iteration...");
 		long startTime = System.currentTimeMillis();
 		Action[] policy = policyIter.policyIteration(mdp, discountFactor);
 		System.out.println("Policy Iteration Finished in "+
