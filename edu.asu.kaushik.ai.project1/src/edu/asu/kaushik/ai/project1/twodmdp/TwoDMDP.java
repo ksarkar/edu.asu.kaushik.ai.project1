@@ -298,9 +298,4 @@ public class TwoDMDP implements MDP {
 		return states;
 	}
 
-
-	public static void main(String[] args) {
-		
-	}
-
 }

@@ -5,6 +5,13 @@ import edu.asu.kaushik.ai.project1.policyiteration.PolicyIteration;
 import edu.asu.kaushik.ai.project1.twodmdp.Pair;
 import edu.asu.kaushik.ai.project1.twodmdp.TwoDMDP;
 
+/**
+ * Tests the policy iteration algorithm. All the five environments of figure 17.2 of Russel, Norvig book
+ * is tested. Results match fig 17.2.
+ * 
+ * @author Kaushik
+ *
+ */
 public class TestPolicyIteration {
 
 	public static void TestFig17_1() {

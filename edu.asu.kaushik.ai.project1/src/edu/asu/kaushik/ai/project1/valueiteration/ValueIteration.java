@@ -1,4 +1,4 @@
-package edu.asu.kaushik.ai.project1.valueiter;
+package edu.asu.kaushik.ai.project1.valueiteration;
 
 import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.mdp.MDP;
@@ -104,8 +104,5 @@ public class ValueIteration {
 		}
 		return policy;
 	}
-	
-	public static void main(String[] args) {
-		
-	}
+
 }

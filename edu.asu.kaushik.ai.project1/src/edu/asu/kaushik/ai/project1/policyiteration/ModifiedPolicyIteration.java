@@ -3,6 +3,13 @@ package edu.asu.kaushik.ai.project1.policyiteration;
 import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.mdp.State;
 
+/**
+ * Core implementation of modified policy iteration. 
+ * Uses abstract interfaces for MDP, states and actions
+ * 
+ * @author Kaushik
+ *
+ */
 public class ModifiedPolicyIteration extends PolicyIteration {
 
 	@Override
@@ -27,8 +34,4 @@ public class ModifiedPolicyIteration extends PolicyIteration {
 		return val;
 	}
 	
-	public static void main(String[] args) {
-
-	}
-
 }

@@ -6,7 +6,8 @@ import edu.asu.kaushik.ai.project1.mdp.MDP;
 import edu.asu.kaushik.ai.project1.mdp.State;
 
 /**
- * Core implemntation of policy iteration. Uses abstract interfaces for MDP, states and actions
+ * Core implementation of policy iteration. Uses abstract interfaces for MDP, 
+ * states and actions
  * 
  * @author Kaushik
  *
@@ -18,7 +19,7 @@ public class PolicyIteration {
 	 * 
 	 * @param mdp The MDP
 	 * @param discountFactor The discount factor gamma
-	 * @return
+	 * @return The optimum policy chosen by the policy iteration algorithm
 	 */
 	public Action[] policyIteration(MDP mdp, double discountFactor) {
 		
@@ -150,10 +151,6 @@ public class PolicyIteration {
 			}
 		}
 		return coeffs;
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 }

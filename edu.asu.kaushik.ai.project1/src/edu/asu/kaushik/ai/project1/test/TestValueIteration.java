@@ -3,7 +3,7 @@ package edu.asu.kaushik.ai.project1.test;
 import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.twodmdp.Pair;
 import edu.asu.kaushik.ai.project1.twodmdp.TwoDMDP;
-import edu.asu.kaushik.ai.project1.valueiter.ValueIteration;
+import edu.asu.kaushik.ai.project1.valueiteration.ValueIteration;
 
 /**
  * Tests the value iteration algorithm. All the five environments of figure 17.2 of Russel, Norvig book

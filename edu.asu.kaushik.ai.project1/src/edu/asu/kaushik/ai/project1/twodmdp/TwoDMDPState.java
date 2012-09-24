@@ -46,11 +46,4 @@ public class TwoDMDPState implements State {
 		return actions;
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-	}
-
 }

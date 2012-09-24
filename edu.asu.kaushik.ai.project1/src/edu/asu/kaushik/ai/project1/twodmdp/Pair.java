@@ -53,10 +53,4 @@ public class Pair {
 		return "(" + this.x + "," + this.y + ")";
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-	}
 }
