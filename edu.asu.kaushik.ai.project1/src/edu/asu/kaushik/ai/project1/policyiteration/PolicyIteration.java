@@ -5,8 +5,21 @@ import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.mdp.MDP;
 import edu.asu.kaushik.ai.project1.mdp.State;
 
+/**
+ * Core implemntation of policy iteration. Uses abstract interfaces for MDP, states and actions
+ * 
+ * @author Kaushik
+ *
+ */
 public class PolicyIteration {
 
+	/**
+	 * Generic implementation of core policy iteration algorithm
+	 * 
+	 * @param mdp The MDP
+	 * @param discountFactor The discount factor gamma
+	 * @return
+	 */
 	public Action[] policyIteration(MDP mdp, double discountFactor) {
 		
 		int numStates = mdp.getNumStates();
@@ -22,7 +35,7 @@ public class PolicyIteration {
 		
 		boolean isUnchanged = true;
 		do  {
-			val = policyEvaluation(policy, states, discountFactor);
+			val = policyEvaluation(policy, states, val, discountFactor);
 			
 			isUnchanged = true;
 			for (int i = 0; i < numStates; i++){
@@ -53,7 +66,7 @@ public class PolicyIteration {
 		return policy;
 	}
 
-	private double valueOfAction(Action action, double[] val) {
+	protected double valueOfAction(Action action, double[] val) {
 		double value = 0.0000d;
 		if (action == null) {
 			return value;
@@ -82,7 +95,7 @@ public class PolicyIteration {
 		return Double.isInfinite(max)? null : optAction;
 	}
 
-	protected double[] policyEvaluation(Action[] policy, State[] states, double discountFactor) {
+	protected double[] policyEvaluation(Action[] policy, State[] states, double[] oldVal, double discountFactor) {
 		int numStates = policy.length;
 		double coeffs[][] = initCoeffMatrix(numStates);
 		

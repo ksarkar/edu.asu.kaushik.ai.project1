@@ -21,6 +21,7 @@ public class ValueIteration {
 	 * 
 	 * @param mdp The MDP
 	 * @param maxErr The maximum allowable error in the estimation of the state value
+	 * @param discountFactor The discount factor gamma
 	 * @return The vector containing the calculated state values
 	 */
 	public double[] valueIteration(MDP mdp, double maxErr, double discountFactor) {
