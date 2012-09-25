@@ -1,5 +1,7 @@
 package edu.asu.kaushik.ai.project1.valueiteration;
 
+import java.util.ArrayList;
+
 import edu.asu.kaushik.ai.project1.mdp.Action;
 import edu.asu.kaushik.ai.project1.mdp.MDP;
 import edu.asu.kaushik.ai.project1.mdp.State;
@@ -103,6 +105,58 @@ public class ValueIteration {
 			}
 		}
 		return policy;
+	}
+	
+	public Double[] valueIterationExp(MDP mdp, double maxErr, double discountFactor, int stateId) {
+		this.discountFactor = discountFactor;
+		
+		int numStates = mdp.getNumStates();
+		
+		// local variables
+		double[] oldVal = new double[numStates];
+		double[] val = new double[numStates];
+		
+		for (int i = 0; i < val.length; i++) {
+			val[i] = 0.0d;
+		}
+		
+		State[] states = mdp.getStates();
+		double delta = 0;
+		
+		ArrayList<Double> stateValue = new ArrayList<Double>();
+		
+		do {
+			System.arraycopy(val, 0, oldVal, 0, val.length);
+			delta = 0;
+			for (int i = 0; i < numStates; i++) {
+				Action actions[] = states[i].getActions();
+				double max = Double.NEGATIVE_INFINITY;
+				for (int j = 0; j < actions.length; j++) {
+					double sum = 0.0d;
+					double[] probs = actions[j].getProbs();
+					int[] nextStateIds = actions[j].getNextStateIds();
+					for (int k = 0; k < probs.length; k++) {
+						sum = sum + (probs[k] * val[nextStateIds[k]]);
+					}
+					if (sum > max) {
+						max = sum;
+					}
+				}
+				max = Double.isInfinite(max)? 0 : max;
+				val[i] = states[i].getReward() + this.discountFactor * max;
+				
+				double diff = Math.abs(val[i] - oldVal[i]);
+				if ( diff > delta) {
+					delta = diff;
+				}
+			}
+			
+			// Monitor the value of the state stateId
+			stateValue.add(val[stateId]);
+			
+		} while(delta >= this.getMaxError(maxErr));
+		
+		return stateValue.toArray(new Double[0]);
 	}
 
 }
