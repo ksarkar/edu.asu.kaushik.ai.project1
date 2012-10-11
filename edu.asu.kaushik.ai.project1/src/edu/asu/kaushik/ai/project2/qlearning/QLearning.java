@@ -31,6 +31,10 @@ public class QLearning {
 	
 	Random random;
 	
+	// data for instrumentation purpose
+	// stores the value of each state after each trial
+	double data[][];
+	
 	
 	public QLearning(MDP world, String[] actionNames, double discountFactor, long randSeed) {
 		super();
@@ -60,11 +64,19 @@ public class QLearning {
 		for (int i = 0; i < this.numStates; i++) {
 			this.stateToIndex.put(states[i], i);
 		}
+		
 	}
 	
 	public void run(int numTrials) throws Exception {
+		// instrumentation
+		this.data = new double[numTrials][this.numStates];
+		
 		// this loop runs the trials
 		for (int i = 0; i < numTrials; i++) {
+			this.prevStateId = -1;
+			this.prevActionId = -1;
+			this.prevReward = 0.0d;
+			
 			State s = world.getStartState();
 			// this loop runs each step of the trial
 			while(true) {
@@ -76,6 +88,7 @@ public class QLearning {
 					s = this.generateNextState(a);
 				}
 			}
+			this.storeStateValues(i);
 		}
 		
 	}
@@ -152,17 +165,6 @@ public class QLearning {
 		return actionId;
 	}
 
-	private double explorationFunction(int currentStateId, int actionId) {
-		return functionFromBook(this.Q[currentStateId][actionId], this.N[currentStateId][actionId]);
-	}
-
-	private double functionFromBook(double u, int n) {
-		double Rplus = 2.00d;
-		int Ne = 5;
-
-		return (n < Ne)? Rplus : u;
-	}
-
 	// look up the Q table to find out the actionId with maximum Q value for this state
 	private double maxQValue(int currentStateId) {
 		if (this.world.isTerminalState(this.world.getStates()[currentStateId])) {
@@ -178,17 +180,94 @@ public class QLearning {
 			return max;
 		}
 	}
+	
+	private int maxQActionId(int i) {
+		if (this.world.isTerminalState(this.world.getStates()[i])) {
+			return this.numActions;
+		}
+		else {
+			int actionId = 0;
+			double max = this.Q[i][0];
+			double val;
+			for (int j = 1; j < this.numActions; j++) {
+				val = this.Q[i][j];
+				if (val > max) {
+					max = val;
+					actionId = j;
+				}
+			}
+			return actionId;
+		}
+
+	}
+	
+	private double explorationFunction(int currentStateId, int actionId) {
+		return functionFromBook(this.Q[currentStateId][actionId], this.N[currentStateId][actionId]);
+		//return newFunction(this.Q[currentStateId][actionId], this.N[currentStateId][actionId]);
+	}
+
+	private double newFunction(double u, int n) {
+		int Ne = 5;
+		double Rplus = 2.00d;
+		double util = 0.00;
+		double penalty = 0.25d;
+		
+		if (n < Ne) {
+			return Rplus;
+		}
+		else {
+			if (u < util) {
+				return u - penalty;
+			}
+			else {
+				return u;
+			}
+		}
+	}
+
+	private double functionFromBook(double u, int n) {
+		double Rplus = 2.00d;
+		int Ne = 5;
+
+		return (n < Ne)? Rplus : u;
+	}
+
 
 	private double alpha(int n) {
 		return ((double)60) / (59 + n);
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	public double[] getValues() {
+		double[] values = new double[this.numStates];
+		for (int i = 0; i < this.numStates; i++) {
+			values[i] = this.maxQValue(i);
+		}
+		return values;
 	}
+	
+	public Action[] getPolicy() {
+		Action[] policy = new Action[this.numStates];
+		State[] states = this.world.getStates();
+		for (int i = 0; i < this.numStates; i++){
+			int actionId = this.maxQActionId(i);
+			if (actionId == this.numActions) {  // terminal states
+				policy[i] = null;
+			}
+			else {
+				policy[i] = states[i].getActions()[actionId];
+			}
+		}
+		return policy;
+	}
+
+	private void storeStateValues(int i) {
+		for (int j = 0; j < this.numStates; j++) {
+			this.data[i][j] = this.maxQValue(j);
+		}
+	}
+
+	public double[][] getData() {
+		return data;
+	}	
 
 }

@@ -347,7 +347,7 @@ public class TwoDMDP implements MDP {
 
 	@Override
 	public State getStartState() {
-		return this.states[this.map.get(new Pair(0,0))]	;
+		return this.states[this.map.get(new Pair(1,1))]	;
 	}
 
 	@Override
