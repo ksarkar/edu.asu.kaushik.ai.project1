@@ -345,4 +345,15 @@ public class TwoDMDP implements MDP {
 		return states;
 	}
 
+	@Override
+	public State getStartState() {
+		return this.states[this.map.get(new Pair(0,0))]	;
+	}
+
+	@Override
+	public boolean isTerminalState(State s) {
+		TwoDMDPState state = (TwoDMDPState)s;
+		return (this.isGoalState(state.getPosition(), this.goalPositions) == -1)? false : true;
+	}
+
 }
